@@ -12,6 +12,7 @@ struct client_data {
   util_timer* timer;
 };
 
+/*timer*/
 class util_timer {
  public:
   util_timer() : prev(NULL), next(NULL) {}
@@ -19,11 +20,12 @@ class util_timer {
  public:
   time_t expire;                  // timeout value
   void (*cb_func)(client_data*);  // callback function
-  client_data* user_data;
-  util_timer* prev;  // prev timer
-  util_timer* next;  // next timer
+  client_data* user_data;         // note: a pointer
+  util_timer* prev;               // prev timer pointer
+  util_timer* next;               // next timer pointer
 };
 
+/*timer container*/
 class sort_timer_lst {
  public:
   sort_timer_lst() : head(NULL), tail(NULL) {}
@@ -84,7 +86,7 @@ class sort_timer_lst {
       delete timer;
       head = NULL;
       tail = NULL;
-      return;
+      return;:
     }
     if (timer == head) {
       head = head->next;
@@ -103,7 +105,7 @@ class sort_timer_lst {
     delete timer;
   }
 
-  /*this function executed one after every fixed period*/
+  /*this function executed once after every fixed period*/
   /*handle timeout event*/
   void tick() {
     if (!head) {
