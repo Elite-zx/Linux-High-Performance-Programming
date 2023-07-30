@@ -178,7 +178,7 @@ int main(int argc, char* argv[]) {
   assert(shmfd != -1);
   ret = ftruncate(shmfd, BUFFER_SIZE * MAX_CLIENT_NUMBER);
   assert(ret != -1);
-  // a long-term shared memory
+  // attach posix shared_memory to main process address space
   char* shm = (char*)mmap(NULL, MAX_CLIENT_NUMBER * BUFFER_SIZE,
                           PROT_READ | PROT_WRITE, MAP_SHARED, shmfd, 0);
   assert(shm != MAP_FAILED);
@@ -220,7 +220,7 @@ int main(int argc, char* argv[]) {
           close(sig_pipe_fd[1]);
 
           run_child(user_cnt, users, shm);
-          // have question here
+          // detach shm from process address space
           munmap((void*)shm, MAX_CLIENT_NUMBER * BUFFER_SIZE);
           exit(0);
         } else {
