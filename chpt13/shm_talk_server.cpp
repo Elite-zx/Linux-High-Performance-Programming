@@ -28,7 +28,7 @@ struct client_data {
 };
 
 static const char* shm_name = "/my_shm";
-/*handle signal by uni-event*/
+/*handle signal by unified event source*/
 int sig_pipefd[2];
 int epollfd;
 int listenfd;
