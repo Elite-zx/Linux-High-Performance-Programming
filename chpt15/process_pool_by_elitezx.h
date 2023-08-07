@@ -1,3 +1,5 @@
+/* Author: Elite-ZX (Morris)*/
+
 #ifndef PROCESSPOOL_H
 #define PROCESSPOOL_H
 
